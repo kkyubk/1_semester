@@ -1,7 +1,9 @@
-﻿using System;
+﻿using Desktop.Utiles;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -24,51 +26,77 @@ namespace Desktop
             InitializeComponent();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Button_Click_2(object sender, RoutedEventArgs e)
         {
-            
-        }
+            string username = textBox.Text; // Имя пользователя
+            string email = textBox1.Text; // Email
+            string password = textBox2.Text; // Пароль
+            string confirmPassword = textBox3.Text; // Подтверждение пароля
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-            MainWindow mainwindow = new MainWindow();
+            // Валидация данных
+            if (!username.ValidateUsername())
+            {
+                MessageBox.Show("Имя пользователя должно быть не менее 3 символов.");
+                return;
+            }
 
-            mainwindow.Show();
+            if (!email.ValidateEmail())
+            {
+                MessageBox.Show("Введите корректную почту.");
+                return;
+            }
+
+            if (!password.ValidatePassword())
+            {
+                MessageBox.Show("Пароль должен быть не менее 6 символов.");
+                return;
+            }
+
+            if (password != confirmPassword)
+            {
+                MessageBox.Show("Пароли не совпадают.");
+                return;
+            }
+
+            // Данные корректны
+            MessageBox.Show("Регистрация успешна!");
+            Main_empty main_empty = new Main_empty();
+
+            main_empty.Show();
 
             this.Close();
         }
         private void TextBox_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
         {
-            UpdateWatermark();
+            watermark.Visibility = string.IsNullOrEmpty(textBox.Text) ? Visibility.Visible : Visibility.Hidden;
         }
 
-        private void UpdateWatermark()
+        private void TextBox1_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
         {
-            watermark.Visibility = string.IsNullOrWhiteSpace(textBox.Text) ? Visibility.Visible : Visibility.Collapsed;
+            watermark1.Visibility = string.IsNullOrEmpty(textBox1.Text) ? Visibility.Visible : Visibility.Hidden;
         }
-        private void TextBox_TextChanged1(object sender, System.Windows.Controls.TextChangedEventArgs e)
+
+        private void TextBox2_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
         {
-            UpdateWatermark1();
+            watermark2.Visibility = string.IsNullOrEmpty(textBox2.Text) ? Visibility.Visible : Visibility.Hidden;
         }
-        private void UpdateWatermark1()
+
+        private void TextBox3_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
         {
-            watermark1.Visibility = string.IsNullOrWhiteSpace(textBox1.Text) ? Visibility.Visible : Visibility.Collapsed;
+            watermark3.Visibility = string.IsNullOrEmpty(textBox3.Text) ? Visibility.Visible : Visibility.Hidden;
         }
-        private void TextBox_TextChanged2(object sender, System.Windows.Controls.TextChangedEventArgs e)
+
+        private void BackButton_Click(object sender, RoutedEventArgs e)
         {
-            UpdateWatermark2();
+            // Логика для кнопки "Назад"
+            MessageBox.Show("Вернуться назад");
         }
-        private void UpdateWatermark2()
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            watermark2.Visibility = string.IsNullOrWhiteSpace(textBox2.Text) ? Visibility.Visible : Visibility.Collapsed;
-        }
-        private void TextBox_TextChanged3(object sender, System.Windows.Controls.TextChangedEventArgs e)
-        {
-            UpdateWatermark3();
-        }
-        private void UpdateWatermark3()
-        {
-            watermark3.Visibility = string.IsNullOrWhiteSpace(textBox3.Text) ? Visibility.Visible : Visibility.Collapsed;
+            MainWindow mainwindow = new MainWindow();
+            mainwindow.Show();
+            this.Close();
         }
     }
 }
