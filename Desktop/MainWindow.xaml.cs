@@ -1,22 +1,17 @@
-﻿using Desktop.Repository;
+﻿using Desktop.model;
+using Desktop.Repository;
 using Desktop.Utiles;
 using Desktop.View;
 using System;
-using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using static Desktop.data.Repository;
 
 namespace Desktop
@@ -24,12 +19,64 @@ namespace Desktop
     public partial class MainWindow : Window
     {
         private readonly AuthRepository _authRepository;
+        private readonly Desktop.data.DatabaseConnection _dbConnection = new Desktop.data.DatabaseConnection();
+
         public MainWindow()
         {
             InitializeComponent();
             _authRepository = new AuthRepository();
+            TokenStorage.Load(); 
             OpenWithFadeIn();
             InitializeButtonAnimations();
+            CheckSavedTokenAndNavigate();
+        }
+
+        private async void CheckSavedTokenAndNavigate()
+        {
+            if (string.IsNullOrEmpty(TokenStorage.Username) || string.IsNullOrEmpty(TokenStorage.Value))
+            {
+                return;
+            }
+
+            var savedToken = await _authRepository.LoadTokenFromDatabase(TokenStorage.Username);
+            if (!string.IsNullOrEmpty(savedToken) && savedToken == TokenStorage.Value)
+            {
+                using (var connection = await _dbConnection.GetConnectionAsync())
+                {
+                    try
+                    {
+                        var command = new SqlCommand("SELECT IsLoggedOut FROM UserTokens WHERE Email = @Email", connection);
+                        command.Parameters.AddWithValue("@Email", TokenStorage.Username);
+                        var result = await command.ExecuteScalarAsync();
+                        bool? isLoggedOut = result as bool?;
+
+                        if (isLoggedOut == true)
+                        {
+                            TokenStorage.Value = null;
+                            TokenStorage.Username = null;
+                            TokenStorage.Save();
+                        }
+                        else if (isLoggedOut == false || isLoggedOut == null)
+                        {
+                            var mainFrame = this.FindName("MainFrame") as Frame;
+                            if (mainFrame != null)
+                            {
+                                mainFrame.Navigate(new Page2());
+                            }
+                        }
+                    }
+                    finally
+                    {
+                        _dbConnection.CloseConnection(connection);
+                    }
+                }
+            }
+            else
+            {
+                TokenStorage.Value = null;
+                TokenStorage.Username = null;
+                TokenStorage.Save();
+            }
         }
 
         private void OpenWithFadeIn()
@@ -99,6 +146,8 @@ namespace Desktop
                 else
                 {
                     MessageBox.Show("Вход успешно выполнен!");
+                    TokenStorage.Username = email;
+                    TokenStorage.Save();
                     TransitionToPage2();
                 }
             }
@@ -107,7 +156,6 @@ namespace Desktop
                 MessageBox.Show($"Произошла ошибка: {ex.Message}");
             }
         }
-
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {

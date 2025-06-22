@@ -1,4 +1,5 @@
-﻿using Desktop.Repository;
+﻿using Desktop.model;
+using Desktop.Repository;
 using Desktop.Utiles;
 using Microsoft.Win32;
 using System;
@@ -16,6 +17,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
+using static Desktop.data.Repository;
 
 namespace Desktop.View
 {
@@ -28,6 +30,7 @@ namespace Desktop.View
         private bool _isShowingCompletedTasks;
         private bool _isMenuVisible;
         private readonly UserRepository _userRepository;
+        private readonly AuthRepository _authRepository;
 
         public string Username
         {
@@ -65,12 +68,11 @@ namespace Desktop.View
             DataContext = this;
             _taskRepository = new TaskRepository();
             _userRepository = new UserRepository();
+            _authRepository = new AuthRepository();
             FilteredTaskList = new ObservableCollection<TaskItem>();
             _isMenuVisible = false;
 
             Loaded += async (s, e) => await InitializePage();
-
-            System.Diagnostics.Debug.WriteLine($"Page2 constructor - UserRepository.CurrentUser: {UserRepository.CurrentUser?.Name ?? "null"}");
             Username = UserRepository.CurrentUser?.Name ?? "Username";
         }
 
@@ -91,7 +93,6 @@ namespace Desktop.View
         {
             var user = await _userRepository.GetUserInfo();
             Username = user?.Name ?? "Username";
-            System.Diagnostics.Debug.WriteLine($"User info loaded: {Username}");
         }
 
         private async Task LoadProfilePhoto()
@@ -112,19 +113,10 @@ namespace Desktop.View
                         profileImageButtonEmpty.Source = bitmap;
                         profileImageButtonMain.Source = bitmap;
                     }
-                    catch (Exception ex)
+                    catch (Exception)
                     {
-                        System.Diagnostics.Debug.WriteLine($"Error loading profile photo: {ex.Message}");
                     }
                 }
-                else
-                {
-                    System.Diagnostics.Debug.WriteLine("Failed to load profile photo: No bytes received");
-                }
-            }
-            else
-            {
-                System.Diagnostics.Debug.WriteLine("No ImageId available");
             }
         }
 
@@ -178,8 +170,6 @@ namespace Desktop.View
                 label.MouseDown += FilterByCategory_Click;
                 CategoryStackPanel.Children.Add(label);
             }
-
-            System.Diagnostics.Debug.WriteLine($"CategoryColors count: {_taskRepository.CategoryColors.Count}");
         }
 
         private void OpenWithFadeIn()
@@ -412,8 +402,16 @@ namespace Desktop.View
             return profileImageButtonEmpty.IsMouseOver || ProfileStackPanelEmpty.IsMouseOver;
         }
 
-        private void ExitBEmpty_Click(object sender, RoutedEventArgs e)
+        private async void ExitBEmpty_Click(object sender, RoutedEventArgs e)
         {
+            if (!string.IsNullOrEmpty(TokenStorage.Username))
+            {
+                await _authRepository.SetLoggedOutAsync(TokenStorage.Username);
+            }
+            TokenStorage.Value = null;
+            TokenStorage.Username = null;
+            TokenStorage.Save();
+
             if (Application.Current.MainWindow != null)
             {
                 Application.Current.MainWindow.Close();
@@ -496,8 +494,16 @@ namespace Desktop.View
             return profileImageButtonMain.IsMouseOver || ProfileStackPanelMain.IsMouseOver;
         }
 
-        private void ExitBMain_Click(object sender, RoutedEventArgs e)
+        private async void ExitBMain_Click(object sender, RoutedEventArgs e)
         {
+            if (!string.IsNullOrEmpty(TokenStorage.Username))
+            {
+                await _authRepository.SetLoggedOutAsync(TokenStorage.Username);
+            }
+            TokenStorage.Value = null;
+            TokenStorage.Username = null;
+            TokenStorage.Save();
+
             if (Application.Current.MainWindow != null)
             {
                 Application.Current.MainWindow.Close();
