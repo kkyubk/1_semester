@@ -1,0 +1,31 @@
+C:\Users\kkyubk\Desktop\Pr_1_Sidorova-Lab4\Desktop\bin\Debug\net6.0-windows\Desktop.exe
+C:\Users\kkyubk\Desktop\Pr_1_Sidorova-Lab4\Desktop\bin\Debug\net6.0-windows\Desktop.deps.json
+C:\Users\kkyubk\Desktop\Pr_1_Sidorova-Lab4\Desktop\bin\Debug\net6.0-windows\Desktop.runtimeconfig.json
+C:\Users\kkyubk\Desktop\Pr_1_Sidorova-Lab4\Desktop\bin\Debug\net6.0-windows\Desktop.dll
+C:\Users\kkyubk\Desktop\Pr_1_Sidorova-Lab4\Desktop\bin\Debug\net6.0-windows\Desktop.pdb
+C:\Users\kkyubk\Desktop\Pr_1_Sidorova-Lab4\Desktop\bin\Debug\net6.0-windows\Todo.Entities.dll
+C:\Users\kkyubk\Desktop\Pr_1_Sidorova-Lab4\Desktop\bin\Debug\net6.0-windows\Todo.Entities.pdb
+C:\Users\kkyubk\Desktop\Pr_1_Sidorova-Lab4\Desktop\obj\Debug\net6.0-windows\Desktop.csproj.AssemblyReference.cache
+C:\Users\kkyubk\Desktop\Pr_1_Sidorova-Lab4\Desktop\obj\Debug\net6.0-windows\Main empty.g.cs
+C:\Users\kkyubk\Desktop\Pr_1_Sidorova-Lab4\Desktop\obj\Debug\net6.0-windows\Main.g.cs
+C:\Users\kkyubk\Desktop\Pr_1_Sidorova-Lab4\Desktop\obj\Debug\net6.0-windows\MainWindow.g.cs
+C:\Users\kkyubk\Desktop\Pr_1_Sidorova-Lab4\Desktop\obj\Debug\net6.0-windows\Window1.g.cs
+C:\Users\kkyubk\Desktop\Pr_1_Sidorova-Lab4\Desktop\obj\Debug\net6.0-windows\App.g.cs
+C:\Users\kkyubk\Desktop\Pr_1_Sidorova-Lab4\Desktop\obj\Debug\net6.0-windows\GeneratedInternalTypeHelper.g.cs
+C:\Users\kkyubk\Desktop\Pr_1_Sidorova-Lab4\Desktop\obj\Debug\net6.0-windows\Desktop_MarkupCompile.cache
+C:\Users\kkyubk\Desktop\Pr_1_Sidorova-Lab4\Desktop\obj\Debug\net6.0-windows\Desktop_MarkupCompile.lref
+C:\Users\kkyubk\Desktop\Pr_1_Sidorova-Lab4\Desktop\obj\Debug\net6.0-windows\Main empty.baml
+C:\Users\kkyubk\Desktop\Pr_1_Sidorova-Lab4\Desktop\obj\Debug\net6.0-windows\Main.baml
+C:\Users\kkyubk\Desktop\Pr_1_Sidorova-Lab4\Desktop\obj\Debug\net6.0-windows\MainWindow.baml
+C:\Users\kkyubk\Desktop\Pr_1_Sidorova-Lab4\Desktop\obj\Debug\net6.0-windows\Window1.baml
+C:\Users\kkyubk\Desktop\Pr_1_Sidorova-Lab4\Desktop\obj\Debug\net6.0-windows\Desktop.g.resources
+C:\Users\kkyubk\Desktop\Pr_1_Sidorova-Lab4\Desktop\obj\Debug\net6.0-windows\Desktop.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\kkyubk\Desktop\Pr_1_Sidorova-Lab4\Desktop\obj\Debug\net6.0-windows\Desktop.AssemblyInfoInputs.cache
+C:\Users\kkyubk\Desktop\Pr_1_Sidorova-Lab4\Desktop\obj\Debug\net6.0-windows\Desktop.AssemblyInfo.cs
+C:\Users\kkyubk\Desktop\Pr_1_Sidorova-Lab4\Desktop\obj\Debug\net6.0-windows\Desktop.csproj.CoreCompileInputs.cache
+C:\Users\kkyubk\Desktop\Pr_1_Sidorova-Lab4\Desktop\obj\Debug\net6.0-windows\Desktop.csproj.Up2Date
+C:\Users\kkyubk\Desktop\Pr_1_Sidorova-Lab4\Desktop\obj\Debug\net6.0-windows\Desktop.dll
+C:\Users\kkyubk\Desktop\Pr_1_Sidorova-Lab4\Desktop\obj\Debug\net6.0-windows\refint\Desktop.dll
+C:\Users\kkyubk\Desktop\Pr_1_Sidorova-Lab4\Desktop\obj\Debug\net6.0-windows\Desktop.pdb
+C:\Users\kkyubk\Desktop\Pr_1_Sidorova-Lab4\Desktop\obj\Debug\net6.0-windows\Desktop.genruntimeconfig.cache
+C:\Users\kkyubk\Desktop\Pr_1_Sidorova-Lab4\Desktop\obj\Debug\net6.0-windows\ref\Desktop.dll
